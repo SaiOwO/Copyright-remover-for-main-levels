@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameOptionsLayer.hpp>
 #include <Geode/modify/LevelSelectLayer.hpp>
-#include <Geode/modify/LevelTools.hpp>
+#include <Geode/modify/FMODAudioEngine.hpp>
 
 using namespace geode::prelude;
 
@@ -72,41 +72,37 @@ class $modify(LevelSelectLayer) {
 	} 
 };
 
-class $modify(LevelTools) {
-    static gd::string getAudioFileName(int p0) {
-        gd::string song = "StereoMadness";
+class $modify(FMODAudioEngine) {
+    TodoReturn loadMusic(gd::string p0, float p1, float p2, float p3, bool p4, int p5, int p6) {
+        std::string song = p0;
 
-        switch (p0) {
-            case 1: song = "BackOnTrack"; break;
-            case 2: song = "Polargeist"; break;
-            case 3: song = "DryOut"; break;
-            case 4: song = "BaseAfterBase"; break;
-            case 5: song = "CantLetGo"; break;
-            case 6: song = "Jumper"; break;
-            case 7: song = "TimeMachine"; break;
-            case 8: song = "Cycles"; break;
-            case 9: song = "xStep"; break;
-            case 10: song = "Clutterfunk"; break;
-            case 11: song = "TheoryOfEverything"; break;
-            case 12: song = "Electroman"; break;
-            case 13: song = "Clubstep"; break;
-            case 14: song = "Electrodynamix"; break;
-            case 15: song = "HexagonForce"; break;
-            case 16: song = "BlastProcessing"; break;
-            case 17: song = "TheoryOfEverything2"; break;
-            case 18: song = "GeometricalDominator"; break;
-            case 19: song = "Deadlocked"; break;
-            case 20: song = "Fingerdash"; break;
-            case 21: song = "Dash"; break;
-            case 22: song = "Explorers"; break;
-            case 26: song = "djRubRub"; break;
+        if (Mod::get()->getSettingValue<bool>("no-copyright")) {
+            switch (hash(song.c_str())) {
+                case hash("StereoMadness.mp3"): p0 = "StereoMadnessAlt.mp3"_spr; break;
+                case hash("BackOnTrack.mp3"): p0 = "BackOnTrackAlt.mp3"_spr; break;
+                case hash("Polargeist.mp3"): p0 = "PolargeistAlt.mp3"_spr; break;
+                case hash("DryOut.mp3"): p0 = "DryOutAlt.mp3"_spr; break;
+                case hash("BaseAfterBase.mp3"): p0 = "BaseAfterBaseAlt.mp3"_spr; break;
+                case hash("CantLetGo.mp3"): p0 = "CantLetGoAlt.mp3"_spr; break;
+                case hash("Jumper.mp3"): p0 = "JumperAlt.mp3"_spr; break;
+                case hash("TimeMachine.mp3"): p0 = "TimeMachineAlt.mp3"_spr; break;
+                case hash("Cycles.mp3"): p0 = "CyclesAlt.mp3"_spr; break;
+                case hash("xStep.mp3"): p0 = "xStepAlt.mp3"_spr; break;
+                case hash("Clutterfunk.mp3"): p0 = "ClutterfunkAlt.mp3"_spr; break;
+                case hash("TheoryOfEverything.mp3"): p0 = "TheoryOfEverythingAlt.mp3"_spr; break;
+                case hash("Electroman.mp3"): p0 = "ElectromanAlt.mp3"_spr; break;
+                case hash("Clubstep.mp3"): p0 = "ClubstepAlt.mp3"_spr; break;
+                case hash("Electrodynamix.mp3"): p0 = "ElectrodynamixAlt.mp3"_spr; break;
+                case hash("HexagonForce.mp3"): p0 = "HexagonForceAlt.mp3"_spr; break;
+                case hash("BlastProcessing.mp3"): p0 = "BlastProcessingAlt.mp3"_spr; break;
+                case hash("TheoryOfEverything2.mp3"): p0 = "TheoryOfEverything2Alt.mp3"_spr; break;
+                case hash("GeometricalDominator.mp3"): p0 = "GeometricalDominatorAlt.mp3"_spr; break;
+                case hash("Deadlocked.mp3"): p0 = "DeadlockedAlt.mp3"_spr; break;
+                case hash("Fingerdash.mp3"): p0 = "FingerdashAlt.mp3"_spr; break;
+                case hash("Dash.mp3"): p0 = "DashAlt.mp3"_spr; break;
+            }
         }
-
-        if (Mod::get()->getSettingValue<bool>("no-copyright")) 
-            song = CCString::createWithFormat("%sAlt.mp3"_spr, song.c_str())->getCString();
-        else 
-            song = CCString::createWithFormat("%s.mp3", song.c_str())->getCString();
-
-        return song;
+        return FMODAudioEngine::loadMusic(p0, p1, p2, p3, p4, p5, p6);
     }
 };
+
