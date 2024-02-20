@@ -9,6 +9,7 @@
 	"name": "Copyright remover for main levels",
 	"developer": "elSai",
 	"description": "Change the main songs to a piano version",
+	"repository": "https://github.com/SaiOwO/Copyright-remover-for-main-levels",
 	"settings": {
 		"no-copyright": {
 			"name": "No copyright",
